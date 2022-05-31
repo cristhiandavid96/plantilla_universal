@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 const MainNavbar = () => {
     return (
-        <div>
+        <>
             <Navbar bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="#home">Navbar</Navbar.Brand>
@@ -16,7 +16,7 @@ const MainNavbar = () => {
                     </Nav>
                 </Container>
             </Navbar>            
-        </div>
+        </>
     );
 }
 

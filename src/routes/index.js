@@ -1,25 +1,26 @@
-import ReactDOM from "react-dom/client";
+import React from 'react'
 import {
   BrowserRouter,
   Routes,
   Route,
-} from "react-router-dom";
+} from "react-router-dom"
 // import your route components too
+//components
+import About from '../components/About'
+import Home from '../components/Home'
+import Navbar from '../components/Navbar'
+import Settings from '../components/Settings'
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root")
-);
-root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route index element={<Home />} />
-        <Route path="teams" element={<Teams />}>
-          <Route path=":teamId" element={<Team />} />
-          <Route path="new" element={<NewTeamForm />} />
-          <Route index element={<LeagueStandings />} />
-        </Route>
-      </Route>
-    </Routes>
-  </BrowserRouter>
-);
+
+export default function index() {
+  return (
+    <BrowserRouter>
+      <Navbar />
+        <Routes>
+            <Route index element={<Home />} />
+            <Route path="about" exact element={<About />} />
+            <Route path="settings" exact element={<Settings />} />
+        </Routes>
+    </BrowserRouter>
+  )
+}
