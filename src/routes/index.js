@@ -6,10 +6,10 @@ import {
 } from "react-router-dom"
 // import your route components too
 //components
-import About from '../components/About'
-import Home from '../components/Home'
-import Navbar from '../components/Navbar'
-import Settings from '../components/Settings'
+import About from '../pages/about'
+import Home from '../pages/home'
+import Navbar from '../components/navbar'
+import Settings from '../pages/settings'
 
 
 export default function index() {
