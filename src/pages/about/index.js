@@ -2,8 +2,15 @@ import { Form, Row, Button, Col, InputGroup } from 'react-bootstrap'
 import { Formik } from 'formik'
 import { schema } from './ValidationForm'
 import Card from '../../components/card/Card'
+import { useAuth } from '../../context/authContext'
+
 
 export default function About() {
+
+  const { user } = useAuth()
+  
+  console.log(user)
+
   return (
     <Card header="About" title="Main About">
       <Formik

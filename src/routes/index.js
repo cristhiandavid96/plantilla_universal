@@ -8,19 +8,26 @@ import {
 //components
 import About from '../pages/about'
 import Home from '../pages/home'
+import Login from '../pages/login/LoguinForm'
+import Register from '../pages/login/RegisterForm'
 import Navbar from '../components/navbar'
 import Settings from '../pages/settings'
+import { AuthProvider } from '../context/authContext'
 
 
 export default function index() {
   return (
     <BrowserRouter>
       <Navbar />
-        <Routes>
-            <Route index element={<Home />} />
+      <AuthProvider>
+      <Routes>
+            <Route index element={<Login />} />
+            <Route path="registro" element={<Register />} />
+            <Route path="home" element={<Home />} />
             <Route path="about" exact element={<About />} />
             <Route path="settings" exact element={<Settings />} />
         </Routes>
+      </AuthProvider>       
     </BrowserRouter>
   )
 }
