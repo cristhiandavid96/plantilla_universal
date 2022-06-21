@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
+import CardMain from '../../components/card/Card';
 
 export default function RegisterForm() {
 
@@ -13,9 +14,9 @@ export default function RegisterForm() {
     const [error, setError] = useState();
 
 
-    const { signup } = useAuth()
+    const { singUp } = useAuth()
 
-    const navigate = useNavigate
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         setUser({
@@ -27,10 +28,10 @@ export default function RegisterForm() {
 
     const handlesubmit = async (e) => {
         e.preventDefault();
-
+        setError('')
         try {
-            await signup(user.email, user.password);
-            navigate('/home');
+            await singUp(user.email, user.password);
+            navigate('/');
         } catch (error) {
             setError(error.message)
         }
@@ -38,29 +39,22 @@ export default function RegisterForm() {
     }
 
     return (
-        <div>
+        <CardMain title={'Formulario Registro'} header='Registro'>
             {error && <p>{error}</p>}
             <Form onSubmit={handlesubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>Correo</Form.Label>
                     <Form.Control type="email" name="email" onChange={handleChange} placeholder="Enter email" />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" onChange={handleChange} name="password" placeholder="Password" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
                 <Button variant="primary" type="submit">
-                    Register
+                    Guardar Registro
                 </Button>
             </Form>
-        </div>
+        </CardMain>
 
     )
 }

@@ -9,7 +9,7 @@ export default function About() {
 
   const { user } = useAuth()
   
-  console.log(user)
+  // console.log(user)
 
   return (
     <Card header="About" title="Main About">

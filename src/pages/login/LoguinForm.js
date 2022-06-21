@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useAuth } from '../../context/authContext';
 import { useNavigate } from 'react-router-dom';
+import CardMain from '../../components/card/Card';
 
 export default function LoguinForm() {
 
@@ -23,10 +24,12 @@ export default function LoguinForm() {
         });
     }
 
-    //console.log("RegisterForm",user)
-
+    const registro = (e) => {
+        navigate('/registro')
+    }
     const handlesubmit = async (e) => {
         e.preventDefault();
+        setError('')
         try {
             await login(user.email, user.password);
             navigate('/home');
@@ -36,28 +39,26 @@ export default function LoguinForm() {
     }
 
     return (
-        <div>
+        <CardMain title={'Formulario Loguin'} header='Loguin'>
             {error && <p>{error}</p>}
             <Form onSubmit={handlesubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" name="email" onChange={handleChange} placeholder="Enter email" />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
+                    <Form.Label>Correo</Form.Label>
+                    <Form.Control type="email" name="email" onChange={handleChange} placeholder="Enter email" />                   
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" onChange={handleChange} name="password" placeholder="Password" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
                 <Button variant="primary" type="submit">
-                    Register
-                </Button>
+                    Loguin
+                </Button>                
             </Form>
-        </div>
+            <br/>
+            <Button variant="primary" type="button" onClick={registro}>
+                    Registrarte
+            </Button>
+        </CardMain>
     )
 }

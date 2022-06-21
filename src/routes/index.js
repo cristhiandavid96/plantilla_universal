@@ -16,18 +16,21 @@ import { AuthProvider } from '../context/authContext'
 
 
 export default function index() {
+
   return (
-    <BrowserRouter>
-      <Navbar />
-      <AuthProvider>
-      <Routes>
+    <>
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
             <Route index element={<Login />} />
             <Route path="registro" element={<Register />} />
-            <Route path="home" element={<Home />} />
-            <Route path="about" exact element={<About />} />
-            <Route path="settings" exact element={<Settings />} />
-        </Routes>
-      </AuthProvider>       
-    </BrowserRouter>
+            <Route path="home" element={<Navbar><Home /></Navbar>} />
+            <Route path="about" exact element={<Navbar><About /></Navbar>} />
+            <Route path="settings" exact element={<Navbar><Settings /></Navbar>} />
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
+    </>
+
   )
 }
