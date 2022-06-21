@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
-import { Form, Button,Alert } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
+import { useAuth } from '../../context/authContext';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/authContext'
 
 export default function LoguinForm() {
 
     const [user, setUser] = useState({
         email: '',
         password: ''
-    })
+    });
+    
+    const [error, setError] = useState();
 
-    const [error, setError] = useState()
+    const { login } = useAuth()
 
-    const { singUp } = useAuth();
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         setUser({
@@ -20,43 +22,26 @@ export default function LoguinForm() {
             [e.target.name]: e.target.value, // actualiza el valor de la propiedad name     
         });
     }
-    const navigate = useNavigate()
+
+    //console.log("RegisterForm",user)
 
     const handlesubmit = async (e) => {
-        e.preventDefault()
-        setError('')
-
+        e.preventDefault();
         try {
-
-            await singUp(user.email, user.password)
-            navigate('home')
-
+            await login(user.email, user.password);
+            navigate('/home');
         } catch (error) {
-            console.log(error)
-            let errorMesassage=""
-
-            if(error.code === "auth/missing-email" || error.code === "auth/invalid-email"){
-                errorMesassage = "correo invalido"
-            }else if(error.code === "auth/weak-password"){
-                errorMesassage = "contraseña debil, debe tener almenos 6 caracteres"
-            }else{
-                errorMesassage = error
-            }
-
-            setError(errorMesassage)
+            setError(error.message)
         }
     }
-    //console.log("LoguinForm",user)
 
     return (
         <div>
-
-        {error && <Alert variant='danger' >{error}</Alert>}
-
-        <Form onSubmit={handlesubmit}>
+            {error && <p>{error}</p>}
+            <Form onSubmit={handlesubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="text" name="email" onChange={handleChange} placeholder="Enter email" />
+                    <Form.Control type="email" name="email" onChange={handleChange} placeholder="Enter email" />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
@@ -74,6 +59,5 @@ export default function LoguinForm() {
                 </Button>
             </Form>
         </div>
-        
     )
 }
