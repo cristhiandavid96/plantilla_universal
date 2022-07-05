@@ -13,10 +13,10 @@ import Register from '../pages/login/RegisterForm'
 import Navbar from '../components/navbar'
 import Settings from '../pages/settings'
 import { AuthProvider } from '../context/authContext'
+import PrivateRoute from './privateRoute'
 
 
 export default function index() {
-
   return (
     <>
       <BrowserRouter>
@@ -24,9 +24,9 @@ export default function index() {
           <Routes>
             <Route index element={<Login />} />
             <Route path="registro" element={<Register />} />
-            <Route path="home" element={<Navbar><Home /></Navbar>} />
-            <Route path="about" exact element={<Navbar><About /></Navbar>} />
-            <Route path="settings" exact element={<Navbar><Settings /></Navbar>} />
+            <Route path="home" element={<PrivateRoute><Navbar><Home /></Navbar></PrivateRoute>} />
+            <Route path="about" exact element={<PrivateRoute><Navbar><About /></Navbar></PrivateRoute>} />
+            <Route path="settings" exact element={<PrivateRoute><Navbar><Settings /></Navbar></PrivateRoute>} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

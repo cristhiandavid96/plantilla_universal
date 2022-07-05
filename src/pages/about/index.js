@@ -15,7 +15,7 @@ export default function About() {
     <Card header="About" title="Main About">
       <Formik
         validationSchema={schema}
-        onSubmit={console.log}
+        // onSubmit={console.log}
         initialValues={{
           firstName: 'Mark',
           lastName: 'Otto',
