@@ -13,7 +13,7 @@ export default function LoguinForm() {
     
     const [error, setError] = useState();
 
-    const { login } = useAuth()
+    const { login,loginWithGoogle } = useAuth()
 
     const navigate = useNavigate()
 
@@ -38,6 +38,17 @@ export default function LoguinForm() {
         }
     }
 
+    const handleGoogleSignin = async (e) => {
+        e.preventDefault();
+        setError('')
+        try {
+            await loginWithGoogle();
+            navigate('/home');
+        } catch (error) {
+            setError(error.message)
+        }
+    }
+
     return (
         <CardMain title={'Formulario Loguin'} header='Loguin'>
             {error && <p>{error}</p>}
@@ -56,6 +67,9 @@ export default function LoguinForm() {
                 </Button>                
             </Form>
             <br/>
+            <Button variant="primary" type="button" onClick={handleGoogleSignin}>
+                    Loguin Google
+            </Button>
             <Button variant="primary" type="button" onClick={registro}>
                     Registrarte
             </Button>

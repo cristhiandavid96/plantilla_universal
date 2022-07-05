@@ -12,9 +12,13 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    // console.log('logout')
-    await logout()
-    navigate('/')
+    try {
+      await logout()
+      navigate('/')
+    } catch (error) {
+      console.log('error')
+    }
+
   }
 
   if (loading) {
@@ -22,7 +26,7 @@ export default function HomePage() {
   }
   return (
     <Card header="Home" title="Home Main">
-      {`Bienvenido ${user?.email}`}
+      {`Bienvenido ${user?.displayName || user?.email}`}
       <br />
       <Button onClick={handleLogout} variant="dark">cerrar session</Button>
 
