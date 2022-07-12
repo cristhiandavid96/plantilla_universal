@@ -1,0 +1,21 @@
+.imageform {
+  background-image: url(".././../assets/images/login.svg") !important;
+  background-size: cover;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  height: 69rem;
+}
+
+.loginform {
+  padding-top: 13rem !important;
+}
+
+.cardLogin {
+  width: 25rem;
+}
+
+.buttonform {
+  background-color: #0f0e9f !important;
+  color: white !important;
+}

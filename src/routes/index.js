@@ -14,6 +14,7 @@ import Navbar from '../components/navbar'
 import Settings from '../pages/settings'
 import { AuthProvider } from '../context/authContext'
 import PrivateRoute from './privateRoute'
+import InitForm from '../pages/login/InitForm'
 
 
 export default function index() {
@@ -24,6 +25,7 @@ export default function index() {
           <Routes>
             <Route index element={<Login />} />
             <Route path="registro" element={<Register />} />
+            <Route path="initial" element={<InitForm />} />
             <Route path="home" element={<PrivateRoute><Navbar><Home /></Navbar></PrivateRoute>} />
             <Route path="about" exact element={<PrivateRoute><Navbar><About /></Navbar></PrivateRoute>} />
             <Route path="settings" exact element={<PrivateRoute><Navbar><Settings /></Navbar></PrivateRoute>} />
